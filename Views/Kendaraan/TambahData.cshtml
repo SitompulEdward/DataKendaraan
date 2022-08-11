@@ -1,0 +1,104 @@
+﻿<div class="container border rounded-sm border-dark mt-3 p-3">
+    <div>
+        <h1>Tambah Data Kendaraan</h1>
+    </div>
+    <div class="p-2">
+        <form id="form-add">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="no-reg">No Registrasi</label>
+                    <input type="text" class="form-control" id="no-reg" name="noReg" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tahun-pembuatan">Tahun Pembuatan</label>
+                    <input type="text" class="form-control" id="tahun-pembuatan" name="thnPembuatan" placeholder="range: 2002 - 2022"
+                           onkeypress="return isNumber(event)" 
+                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "4" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nama-pemilik">Nama Pemilik</label>
+                    <input type="text" class="form-control" id="nama-pemilik" name="namaPemilik" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="kapasitas">Kapasitas Silinder</label>
+                    <input type="text" class="form-control" id="kapasitas" name="kapasitas" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="merk-kendaraan">Merk Kendaraan</label>
+                    <input type="text" class="form-control" id="merk-kendaraan" name="merk" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="warna">Warna Kendaraan</label>
+                    <select class="form-control" id="warna" name="warna" required>
+                        <option value="Merah">Merah</option>
+                        <option value="Hitam">Hitam</option>
+                        <option value="Biru">Biru</option>
+                        <option value="Abu-Abu">Abu-Abu</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="alamat">Alamat Pemilik Kendaraan</label>
+                    <textarea class="form-control" id="alamat" rows="3" name="alamat" required></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="bahan-bakar">Bahan Bakar</label>
+                    <input type="text" class="form-control" id="bahan-bakar" name="bahanBakar" required>
+                </div>
+            </div>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a class="btn btn-dark" asp-controller="Kendaraan" asp-action="Index">Kembali</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+
+        $('#form-add').submit((e) => {
+            e.preventDefault();
+            const { noReg, thnPembuatan, namaPemilik, kapasitas, merk, warna, alamat, bahanBakar } = e.target;
+            $.ajax({
+                method: "POST",
+                url: "/api/Kendaraan/PostKendaraan",
+                data: {
+                    noRegistrasi: noReg.value,
+                    namaPemilik: namaPemilik.value,
+                    alamat: alamat.value,
+                    merk: merk.value,
+                    tahunPembuatan: thnPembuatan.value,
+                    kapasitas: kapasitas.value,
+                    warna: warna.value,
+                    bahanBakar: bahanBakar.value,
+                },
+                success: function (respon) {
+                    alert(`Data Berhasil Ditambahkan`);
+                    e.target.reset();
+                },
+                error: function (err) {
+                    alert("Error Server!");
+                }
+            })
+            
+        })
+
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+}

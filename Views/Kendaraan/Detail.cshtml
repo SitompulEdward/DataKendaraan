@@ -1,0 +1,88 @@
+﻿<div class="container border rounded-sm border-dark mt-3 p-3">
+    <div>
+        <h1>Tambah Data Kendaraan</h1>
+    </div>
+    <div class="p-2">
+        <form id="form-edit">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="no-reg">No Registrasi</label>
+                    <input type="text" class="form-control" id="no-reg" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tahun-pembuatan">Tahun Pembuatan</label>
+                    <input type="text" class="form-control" id="tahun-pembuatan" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nama-pemilik">Nama Pemilik</label>
+                    <input type="text" class="form-control" id="nama-pemilik" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="kapasitas">Kapasitas Silinder</label>
+                    <input type="text" class="form-control" id="kapasitas" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="merk-kendaraan">Merk Kendaraan</label>
+                    <input type="text" class="form-control" id="merk-kendaraan" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="warna">Warna Kendaraan</label>
+                    <input type="text" class="form-control" id="warna" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="alamat">Alamat Pemilik Kendaraan</label>
+                    <textarea class="form-control" id="alamat" rows="3" name="alamat" readonly></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="bahan-bakar">Bahan Bakar</label>
+                    <input type="text" class="form-control" id="bahan-bakar" name="bahanBakar" readonly>
+                </div>
+            </div>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-dark" asp-controller="Kendaraan" asp-action="Index">Kembali</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            const url = new URLSearchParams(document.location.search);
+            const id = url.get('id');
+
+            const endPoint = `https://localhost:44330/api/kendaraan/detailkendaraan/${id}`;
+
+            $.ajax({
+                url: endPoint,
+                method: "GET",
+                success: function (res) {
+                    $("#no-reg").val(res.noRegistrasi);
+                    $("#tahun-pembuatan").val(res.tahunPembuatan);
+                    $("#nama-pemilik").val(res.namaPemilik);
+                    $("#kapasitas").val(res.kapasitas);
+                    $("#merk-kendaraan").val(res.merk);
+                    $("#warna").val(res.warna);
+                    $("#alamat").val(res.alamat);
+                    $("#bahan-bakar").val(res.bahanBakar);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        
+
+
+
+
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid border rounded-sm border-dark  p-3 mt-3" style="border: 2px solid;">
+    <div>
+        <h1>Aplikasi Data Kendaraan</h1>
+    </div>
+    <div class="m-lg-2 mt-lg-4">
+        <form class="" id="form-search">
+            <div class="w-auto" style="padding: 20px; background: #f5d5c1; ">
+                <div class="form-group">
+                    <label for="input-noreg">No Registrasi</label>
+                    <input type="text" class="form-control w-25" id="input-noreg" name="noReg" placeholder="Masukkan No Registrasi">
+                </div>
+                <div class="form-group">
+                    <label for="input-nama">Nama Pemilik</label>
+                    <input type="text" class="form-control w-25" id="input-nama" name="nama" placeholder="Nama Pemilik">
+                </div>
+            </div>
+        </form>
+        <div class="form-group d-flex justify-content-end p-1 mt-1" style="gap:1rem;">
+            <button class="btn btn-primary" id="btn-search">Search</button>
+            <a class="btn btn-primary" asp-controller="Kendaraan" asp-action="TambahData">Add</a>
+        </div>
+    </div>
+
+    <div class="m-lg-2 mt-lg-2">
+        <div class="table table-responsive">
+            <table class="table table-bordered table-hover table-striped table-sm text-center" id="tabel-employee">
+                <thead class="table table-primary ">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th>No Registrasi</th>
+                        <th>Nama Pemilik</th>
+                        <th>Merk Kendaraan</th>
+                        <th>Tahun Pembuatan</th>
+                        <th>Kapasitas</th>
+                        <th>Warna</th>
+                        <th>Bahan Bakar</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table align-middle" id="row-data">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>*@
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="konfirmasi">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts{ 
+
+    <script>
+
+        
+
+    </script>
+
+}
